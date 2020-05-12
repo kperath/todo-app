@@ -34,17 +34,36 @@ export default {
       whiteSpace : new RegExp("^\\s+$") // for whitespace detection in input field
     }
   },
+  mounted() {
+    if (localStorage.getItem("tasks")) {
+      try {
+        this.tasks = JSON.parse(localStorage.getItem("tasks"));
+      }
+      catch(e) {
+        localStorage.removeItem("tasks");
+      }
+    }
+  },
   methods: {
-    addTask : function() {
+    addTask() {
         if (this.task.name != '' && !this.whiteSpace.test(this.task.name)) {
           this.tasks.push({...this.task}); // creates object with this property (shallow copy task) and stores it in array
         }
         this.task.name = ''; // reset text field
+
+        this.saveTasks(); // updated local storage
     },
 
-    removeTask : function(key) {
+    removeTask(key) {
       this.tasks.splice(key, 1);
       this.$forceUpdate(); // shows deletion immediately
+
+      this.saveTasks(); // updated local storage
+    },
+
+    saveTasks : function() {
+      const parsed = JSON.stringify(this.tasks);
+      localStorage.setItem("tasks", parsed);
     }
   }
 }
