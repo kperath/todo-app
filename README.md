@@ -1,6 +1,6 @@
 # todo-app
 
-<img src="src/assets/images/wide.png">
+<img src="src/assets/images/wide.png" width="500" height="500">
 
 ## Project setup
 ```
