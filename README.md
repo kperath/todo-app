@@ -1,5 +1,7 @@
 # todo-app
 
+<img src="src/assets/images/wide.png">
+
 ## Project setup
 ```
 npm install
